@@ -8,15 +8,22 @@
   height: 125px;
   object-fit: none;
   object-position: 11% 29%;
+  background-color: transparent;
+}
+
+.numberClickStyle{
+  color: black;
 }
 
 .mainButton{
   border-style: none;
   border: 0px transparent solid;
+  padding: 0;
 }
 
 .mainButton:active{
-
+  transform: scale(0.95);
+  /* border: 1px solid black; */
 }
 
 @media (prefers-reduced-motion: no-preference) {
