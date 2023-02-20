@@ -3,8 +3,20 @@
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
+  width: 200px;
+  height: 125px;
+  object-fit: none;
+  object-position: 11% 29%;
+}
+
+.mainButton{
+  border-style: none;
+  border: 0px transparent solid;
+}
+
+.mainButton:active{
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,7 +26,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #FAEEE5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,11 +40,11 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */

@@ -1,11 +1,16 @@
-import logo from './logo.svg';
+import logo from './img/cats_clicker.gif';
 import './App.css';
 
 function App() {
+
+  const handleButtonClick = () => {
+    console.log('button clicked');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <button className='mainButton' onClick={handleButtonClick}><img src={logo} className="App-logo" alt="logo" /></button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
