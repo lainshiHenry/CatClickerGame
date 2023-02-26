@@ -9,7 +9,7 @@ import GameController from './controller/GameController';
 
 function App() {
   const gameEngine = new Game(); 
-  const playerA = useRef(new Player({name: 'player', currentScore: 0}));
+  const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 0}));
   const sc = new ScoreController();
   const gc = new GameController();
   const [currentScore, setCurrentScore] = useState(sc.getScore());
