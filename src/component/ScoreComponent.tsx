@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import ScoreController from '../controller/ScoreController';
+import React from 'react'
 
 const ScoreComponent = ({scoreValue} : {scoreValue: number}) => {
     // const [numClicked, setNumClicked] = useState(0);
