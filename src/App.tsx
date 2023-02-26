@@ -1,7 +1,7 @@
 import './img/cats_clicker.gif'
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
-import ScoreController from './controller/ScoreController'
+import ScoreController, { ScoreControllerScoreMessage } from './controller/ScoreController'
 import ScoreComponent from './component/ScoreComponent';
 import Game from './engine/Game';
 import Player from './model/Player';
@@ -17,8 +17,13 @@ function App() {
   const [currentEarningRate, setCurrentEarningRate] = useState(playerA.current.getEarningRatePerSecond);
   
   const update = () => {
-    sc.addScore(playerA.current.getEarningRatePerSecond);
-    setCurrentScore(sc.getScore());
+    try{
+      if(sc.addScore(playerA.current.getEarningRatePerSecond)){
+        setCurrentScore(sc.getScore());
+      }
+    } catch (e){
+      console.log(e);
+    }
   };
 
   const handleButtonClick = () => {
@@ -28,9 +33,20 @@ function App() {
   }
 
   const handleIncreaseScoreRate = (newRate: number) => {
-    console.log(`rate increased by ${newRate}`);
-    gc.handleNewRateChanges({player: playerA.current, newRateToAdd: newRate});
-    setCurrentEarningRate(playerA.current.getEarningRatePerSecond);
+    switch(sc.subtractScore(newRate*10)){
+      case ScoreControllerScoreMessage.purchased:
+        console.log(`rate increased by ${newRate}`);
+        gc.handleNewRateChanges({player: playerA.current, newRateToAdd: newRate});
+        setCurrentEarningRate(playerA.current.getEarningRatePerSecond);
+        setCurrentScore(sc.getScore());
+        break;
+      case ScoreControllerScoreMessage.insufficientFunds:
+        console.log(ScoreControllerScoreMessage.insufficientFunds)
+        break;
+      case ScoreControllerScoreMessage.error:
+      default:
+        break;
+    }
   }
 
   function load(){
@@ -54,11 +70,11 @@ function App() {
     <div className="App">
        <header className="App-header">
         <ScoreComponent scoreValue={currentScore}/>
-        <p>{currentEarningRate}</p>
+        <p hidden>{currentEarningRate}</p>
         <button className='mainButton' onClick={handleButtonClick}><img src={logo} className="App-logo" alt="logo" /></button>
         <section>
           <button onClick={() => {startTimer()}}>Start Timer</button>
-          <button onClick={() => {stopTimer()}}>Stop Timer</button>
+          {/* <button onClick={() => {stopTimer()}}>Stop Timer</button> */}
         </section>
         <section>
           <button onClick={() => {handleIncreaseScoreRate(1)}}>Increase rate by 1</button>
