@@ -6,38 +6,38 @@ import ScoreComponent from './component/ScoreComponent';
 import Game from './engine/Game';
 import Player from './model/Player';
 import GameController from './controller/GameController';
+import UpgradeButton from './component/UpgradeButton';
 
 function App() {
   const gameEngine = new Game(); 
-  const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 0}));
+  // const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 0}));
+  const playerA = new Player({name: 'player', currentScore: 0, currency: 0});
   const sc = new ScoreController();
   const gc = new GameController();
   const [currentScore, setCurrentScore] = useState(sc.getScore());
   const logo = './img/cats_clicker.gif';
-  const [currentEarningRate, setCurrentEarningRate] = useState(playerA.current.getEarningRatePerSecond);
+  const [currentEarningRate, setCurrentEarningRate] = useState(playerA.getEarningRatePerSecond);
   
   const update = () => {
-    try{
-      if(sc.addScore(playerA.current.getEarningRatePerSecond)){
+      if(sc.addScore(playerA.getEarningRatePerSecond) !== ScoreControllerScoreMessage.error ){
         setCurrentScore(sc.getScore());
+        playerA.setCurrentScore = sc.getScore();
+        console.log(playerA);
       }
-    } catch (e){
-      console.log(e);
-    }
   };
 
   const handleButtonClick = () => {
     sc.addScore(1);
     setCurrentScore(sc.getScore());
-    playerA.current.setCurrentScore = sc.getScore();
+    playerA.setCurrentScore = sc.getScore();
   }
 
   const handleIncreaseScoreRate = (newRate: number) => {
     switch(sc.subtractScore(newRate*10)){
       case ScoreControllerScoreMessage.purchased:
         console.log(`rate increased by ${newRate}`);
-        gc.handleNewRateChanges({player: playerA.current, newRateToAdd: newRate});
-        setCurrentEarningRate(playerA.current.getEarningRatePerSecond);
+        gc.handleNewRateChanges({player: playerA, newRateToAdd: newRate});
+        setCurrentEarningRate(playerA.getEarningRatePerSecond);
         setCurrentScore(sc.getScore());
         break;
       case ScoreControllerScoreMessage.insufficientFunds:
@@ -63,7 +63,7 @@ function App() {
   }
 
   useEffect(() => {
-    // load();
+    load();
   })
 
   return (
@@ -73,12 +73,12 @@ function App() {
         <p hidden>{currentEarningRate}</p>
         <button className='mainButton' onClick={handleButtonClick}><img src={logo} className="App-logo" alt="logo" /></button>
         <section>
-          <button onClick={() => {startTimer()}}>Start Timer</button>
+          {/* <button onClick={() => {startTimer()}}>Start Timer</button> */}
           {/* <button onClick={() => {stopTimer()}}>Stop Timer</button> */}
         </section>
         <section>
-          <button onClick={() => {handleIncreaseScoreRate(1)}}>Increase rate by 1</button>
-          <button onClick={() => {handleIncreaseScoreRate(10)}}>Increase rate by 10</button>
+          <UpgradeButton buttonText='Increase rate by 1' onClickFunction={() => {handleIncreaseScoreRate(1)}} minimumAmount={10} playerCurrency={sc.getScore()}/>
+          <UpgradeButton buttonText='Increase rate by 10' onClickFunction={() => {handleIncreaseScoreRate(10)}} minimumAmount={100} playerCurrency={sc.getScore()} /> 
         </section>
       </header>
     </div>

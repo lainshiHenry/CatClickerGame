@@ -22,4 +22,5 @@ export default class Player{
 
     get getEarningRatePerSecond(){ return this._earningRatePerSecond }
     get getCurrency(){ return this._currency }
+    get getCurrentScore() {return this._currentScore }
 }
