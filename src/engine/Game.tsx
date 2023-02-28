@@ -4,9 +4,7 @@ export default class Game{
     _intervalTime: any = null;
 
     startTimer(updateCallbackFunction: Function){
-        console.log('start timer');
         this._intervalTime = setInterval(() => {
-            console.log('time has passed');
             updateCallbackFunction();
         }, this._timeIntervalStart);
     }

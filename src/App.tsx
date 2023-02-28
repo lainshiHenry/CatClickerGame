@@ -7,6 +7,7 @@ import Game from './engine/Game';
 import Player from './model/Player';
 import GameController from './controller/GameController';
 import UpgradeButton from './component/UpgradeButton';
+import NotificationComponent from './component/NotificationComponent';
 
 function App() {
   const gameEngine = new Game(); 
@@ -17,6 +18,8 @@ function App() {
   const [currentScore, setCurrentScore] = useState(sc.getScore());
   const logo = './img/cats_clicker.gif';
   const [currentEarningRate, setCurrentEarningRate] = useState(playerA.getEarningRatePerSecond);
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  let notificiationText = useRef('');
   
   const update = () => {
       if(sc.addScore(playerA.getEarningRatePerSecond) !== ScoreControllerScoreMessage.error ){
@@ -39,6 +42,9 @@ function App() {
         gc.handleNewRateChanges({player: playerA, newRateToAdd: newRate});
         setCurrentEarningRate(playerA.getEarningRatePerSecond);
         setCurrentScore(sc.getScore());
+        notificiationText.current = ScoreControllerScoreMessage.purchased;
+        setIsNotificationVisible(true);
+        
         break;
       case ScoreControllerScoreMessage.insufficientFunds:
         console.log(ScoreControllerScoreMessage.insufficientFunds)
@@ -54,11 +60,9 @@ function App() {
   }
 
   function startTimer(){
-    console.log('timer started');
     gameEngine.startTimer(update);
   }
   function stopTimer(){
-    console.log('timer stopped');
     gameEngine.stopTimer();
   }
 
@@ -66,37 +70,31 @@ function App() {
     load();
   })
 
+  useEffect(() => {
+    if(isNotificationVisible) {
+      setTimeout(() => {
+            setIsNotificationVisible(false);
+            notificiationText.current = '';
+        }, 3000)
+    }
+  }, [isNotificationVisible]);
+
+  
+
   return (
     <div className="App">
-       <header className="App-header">
+       <div className="App-header">
         <ScoreComponent scoreValue={currentScore}/>
         <p hidden>{currentEarningRate}</p>
         <button className='mainButton' onClick={handleButtonClick}><img src={logo} className="App-logo" alt="logo" /></button>
         <section>
-          {/* <button onClick={() => {startTimer()}}>Start Timer</button> */}
-          {/* <button onClick={() => {stopTimer()}}>Stop Timer</button> */}
-        </section>
-        <section>
           <UpgradeButton buttonText='Increase rate by 1' onClickFunction={() => {handleIncreaseScoreRate(1)}} minimumAmount={10} playerCurrency={sc.getScore()}/>
           <UpgradeButton buttonText='Increase rate by 10' onClickFunction={() => {handleIncreaseScoreRate(10)}} minimumAmount={100} playerCurrency={sc.getScore()} /> 
         </section>
-      </header>
+        <NotificationComponent notificationText={notificiationText.current} isNotificationVisible={isNotificationVisible} />
+      </div>
     </div>
   );
 }
 
 export default App;
-
-
-/*
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h2 className='numberClickStyle'>{numClicked}</h2>
-        <button className='mainButton' onClick={handleButtonClick}><img src={logo} className="App-logo" alt="logo" /></button>
-        
-      </header>
-    </div>
-  );
-  */

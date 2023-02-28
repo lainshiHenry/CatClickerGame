@@ -1,0 +1,38 @@
+.notification{
+    position: absolute;
+    /* left: 0; */
+    top: 80%;
+    /* padding: 5px; */
+    background-color: rgba(32, 33, 33, 0.9);
+    border-radius: 50%;
+    width: 125px;
+}
+
+.notificationText{
+    text-align: center;
+    font-size: x-small;
+}
+
+.notificationHidden{
+    display: none;
+}
+
+.notificationShown{
+    display: block;
+}
+
+.fade{animation: fadeIn 3s;}
+
+.fade-out{animation: fadeOut 1s;}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    10% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
