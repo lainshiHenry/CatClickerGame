@@ -8,6 +8,8 @@ import Player from './model/Player';
 import GameController from './controller/GameController';
 import UpgradeButton from './component/UpgradeButton';
 import NotificationComponent from './component/NotificationComponent';
+import UpgradeDialog from './component/UpgradeDialog';
+import { listOfUpgrades } from './data/ListOfUpgradables';
 
 function App() {
   const gameEngine = new Game(); 
@@ -19,6 +21,8 @@ function App() {
   const logo = './img/cats_clicker.gif';
   const [currentEarningRate, setCurrentEarningRate] = useState(playerA.getEarningRatePerSecond);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const upgradeDataArr = listOfUpgrades;
   let notificiationText = useRef('');
   
   const update = () => {
@@ -79,19 +83,19 @@ function App() {
     }
   }, [isNotificationVisible]);
 
-  
-
   return (
     <div className="App">
        <div className="App-header">
         <ScoreComponent scoreValue={currentScore}/>
         <p hidden>{currentEarningRate}</p>
         <button className='mainButton' onClick={handleButtonClick}><img src={logo} className="App-logo" alt="logo" /></button>
-        <section>
+        <button onClick={() => {setOpenDialog(true)}}>Get More Cats</button>
+        {/* <section>
           <UpgradeButton buttonText='Increase rate by 1' onClickFunction={() => {handleIncreaseScoreRate(1)}} minimumAmount={10} playerCurrency={sc.getScore()}/>
           <UpgradeButton buttonText='Increase rate by 10' onClickFunction={() => {handleIncreaseScoreRate(10)}} minimumAmount={100} playerCurrency={sc.getScore()} /> 
-        </section>
+        </section> */}
         <NotificationComponent notificationText={notificiationText.current} isNotificationVisible={isNotificationVisible} />
+        <UpgradeDialog openDialog={openDialog} onCloseDialogFunction={() => {setOpenDialog(false)}} listOfUpgrades={upgradeDataArr} handleScoreIncreaseFunction={handleIncreaseScoreRate} scoreController={sc}/>
       </div>
     </div>
   );
