@@ -25,7 +25,6 @@ const UpgradeDialog = ({openDialog, onCloseDialogFunction, listOfUpgrades, handl
     }
 
     function buildUpgradeItem({item, index}: {item: UpgradeItemProps, index: number}){
-      // return <li><button onClick={() => handleScoreIncreaseFunction(item.upgradeValue)}>{item.nameOfUpgrade}</button></li>
       return <li>
         <UpgradeButton
           buttonText={item.nameOfUpgrade}
