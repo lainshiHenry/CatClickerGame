@@ -1,0 +1,13 @@
+.currencyComponent{
+    display: flex;
+    flex-direction: column;
+}
+p{
+    color: #000;
+}
+
+.firstSection{
+    display: flex;
+    flex-direction: row;
+}
+.secondSection{}

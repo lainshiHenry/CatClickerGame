@@ -1,19 +1,10 @@
 import React from 'react'
+import './ScoreComponent.css'
 
 const ScoreComponent = ({scoreValue} : {scoreValue: number}) => {
-    // const [numClicked, setNumClicked] = useState(0);
-    // const sc = new ScoreController();
-
-    // function updateScore(){
-    //     setNumClicked(sc.getScore());
-    // }
-
-    // useEffect(() => {
-    //     updateScore();
-    // })
 
     return (
-        <h2 className='numberClickStyle'>{scoreValue}</h2>
+        <h2 className='scoreValueText'>{scoreValue}</h2>
     )
 }
 

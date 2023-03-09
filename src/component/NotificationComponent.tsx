@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './NotificationComponent.css'
 
 interface NotificationComponentProps{
@@ -7,7 +7,6 @@ interface NotificationComponentProps{
 }
 
 const NotificationComponent = ({notificationText = '', isNotificationVisible = false}: NotificationComponentProps) => {
-  console.log(notificationText);
   return (
     <div className={isNotificationVisible ? 'notification notificationShown fade' : 'notification notificationHidden'}>
         <p className='notificationText'>{notificationText}</p>

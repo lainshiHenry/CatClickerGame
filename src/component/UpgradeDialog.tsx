@@ -1,36 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './UpgradeDialog.css'
 import { UpgradeItemProps } from '../data/ListOfUpgradables';
 import UpgradeButton from './UpgradeButton';
 import ScoreController from '../controller/ScoreController';
+import Player from '../model/Player';
 
 interface UpgradeDialogProps {
+    player: Player,
     openDialog: boolean,
     onCloseDialogFunction: () => void,
     listOfUpgrades: UpgradeItemProps[],
-    handleScoreIncreaseFunction: (number: number) => void,
+    handleScoreIncreaseFunction: (player: Player, item: UpgradeItemProps) => void,
     scoreController: ScoreController,
 }
 
-const UpgradeDialog = ({openDialog, onCloseDialogFunction, listOfUpgrades, handleScoreIncreaseFunction, scoreController}: UpgradeDialogProps) => {
-
-    const [upgradeArray, setUpgradeArray] = useState(<ul></ul>);
+const UpgradeDialog = ({player, openDialog, onCloseDialogFunction, listOfUpgrades, handleScoreIncreaseFunction, scoreController}: UpgradeDialogProps) => {
 
     function buildUpgradeArr(){
       return <ul className='upgradeList'>
         {listOfUpgrades.map((value: UpgradeItemProps, index: number) => {
-          return buildUpgradeItem({item: value, index: index});
+          return buildUpgradeItem({player: player, item: value, index: index});
         })}
       </ul>
     }
 
-    function buildUpgradeItem({item, index}: {item: UpgradeItemProps, index: number}){
+    function buildUpgradeItem({player, item, index}: {player: Player, item: UpgradeItemProps, index: number}){
+      console.log(player);
       return <li>
         <UpgradeButton
           buttonText={item.nameOfUpgrade}
-          onClickFunction={() => handleScoreIncreaseFunction(item.upgradeValue)}
+          onClickFunction={() => handleScoreIncreaseFunction(player, item)}
           minimumAmount={item.costToUpgrade}
-          playerCurrency={scoreController.getScore()}
+          // playerCurrency={scoreController.getScore()}
+          playerCurrency={player.getCurrency}
         />
       </li>
     }
