@@ -10,7 +10,7 @@ import { MakableItemProps, listOfMakableItemsNames } from './data/ListOfMakableI
 import Game from './engine/Game';
 
 function App() {
-  const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 0, specialCurrency: 0}));
+  const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 1, specialCurrency: 0}));
   const gameEngine = new Game();
   const logo = './img/cats_clicker.gif';
   const [openDialog, setOpenDialog] = useState(false);
