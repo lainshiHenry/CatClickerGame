@@ -56,6 +56,7 @@ export default class Player{
     set setEarningRatePerSecond( newRate: number ){ this._earningRatePerSecond = newRate }
     set setCurrency( newCurrency: number ) {this._currency = newCurrency }
     set setSpecialCurrency( newSpecialCurrency: number ) {this._specialCurrency = newSpecialCurrency }
+    set _setInventory( updatedInventory: PlayerInventory[] ){ this._inventory = updatedInventory }
 
     get getEarningRatePerSecond(){ return this._earningRatePerSecond }
     get getCurrency(){ return this._currency }
@@ -68,6 +69,7 @@ export default class Player{
             if( element.getItem.getNameOfItem === item?.getNameOfItem ){
                 return true;
             }
+            return false;
         });
     }
 
@@ -76,6 +78,7 @@ export default class Player{
             if( element.getItem.getNameOfItem === item.getNameOfItem ){
                 return true;
             }
+            return false;
         })
     }
 
@@ -99,6 +102,17 @@ export default class Player{
 
     _removeQuantityFromInventoryItem({item, quantityToRemove}: {item: PlayerInventory, quantityToRemove: number}) {
         item.setQuantity = item.getQuantity - quantityToRemove;
+        if(item.getQuantity === 0){
+            this._cleanInventory({player: this});
+        }
+    }
+
+    _cleanInventory({player}: {player: Player}){
+        const tempArr = player.getInventory.filter((element) => {
+            return element.getQuantity !== 0;
+        });
+        player._setInventory = tempArr;
+        console.log(tempArr);
     }
 
     removeItemFromInventory({item, quantity}: {item: MakableItem, quantity: number}) {

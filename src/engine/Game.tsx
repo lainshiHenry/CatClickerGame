@@ -11,6 +11,7 @@ export default class Game{
             if( element.getNameOfItem === itemName ){
                 return true;
             }
+            return false;
         });
     }
 
@@ -19,7 +20,7 @@ export default class Game{
     }
 
     makeItem({player, item}: {player: Player, item: MakableItem | undefined}){
-        if( item != undefined ){
+        if( item !== undefined ){
             setTimeout(() => {
                 if( this.cc.removeCurrency({player: player, currencyToRemove: item.getCostToMake}) === CurrencyControllerResults.success ) {
                     player.addItemToInventory({
@@ -32,7 +33,7 @@ export default class Game{
                     console.log(CurrencyControllerResults.insufficientFunds);
                 }
                 
-            }, ( item != undefined ? item.getTimeToMake * 1000 : 0));
+            }, ( item !== undefined ? item.getTimeToMake * 1000 : 0));
         } else {
             console.log('item not found');
         }
