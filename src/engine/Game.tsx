@@ -1,6 +1,6 @@
 import CurrencyController, { CurrencyControllerResults } from "../controller/CurrencyController";
 import { MakableItem, listOfMakableItems, listOfMakableItemsNames } from "../data/ListOfMakableItems";
-import Player from "../model/Player";
+import Player, { InventoryControllerResults } from "../model/Player";
 
 export default class Game{
     private _makableItemsArr = listOfMakableItems;
@@ -43,8 +43,12 @@ export default class Game{
 
         if( doesItemExist ){
             console.log('item exists in inventory');
-            player.removeItemFromInventory({item: item!, quantity: 1});
-            this.cc.addCurrency({player: player, currencyToAdd: item!.getAmountEarned});
+            if ( player.removeItemFromInventory({item: item!, quantity: 1}) === InventoryControllerResults.success){
+                this.cc.addCurrency({player: player, currencyToAdd: item!.getAmountEarned});
+            } else {
+                console.log(InventoryControllerResults.insufficientItems);
+            }
+            
             console.log(player);
             
         } else {

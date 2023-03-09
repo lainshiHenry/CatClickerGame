@@ -1,5 +1,11 @@
 import { MakableItem } from "../data/ListOfMakableItems";
 
+export enum InventoryControllerResults{
+    success = 'Success',
+    insufficientItems = 'Insufficient Items',
+    cannotFindItem = 'Cannot Find Item(s)',
+}
+
 interface PlayerProps{
     name: string,
     currentScore: number,
@@ -99,7 +105,14 @@ export default class Player{
         const getItemFromInventory = this.findItemInInventory({item: item});
 
         if( getItemFromInventory ){
-            this._removeQuantityFromInventoryItem({item: getItemFromInventory, quantityToRemove: quantity});
+            if( getItemFromInventory.getQuantity >= quantity){
+                this._removeQuantityFromInventoryItem({item: getItemFromInventory, quantityToRemove: quantity});
+                return InventoryControllerResults.success;
+            } else {
+                return InventoryControllerResults.cannotFindItem;
+            }
+        } else {
+            return InventoryControllerResults.insufficientItems;
         }
     }
 }
