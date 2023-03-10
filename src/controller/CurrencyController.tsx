@@ -1,9 +1,5 @@
+import { CurrencyControllerResults } from "../data/ListOfEnum";
 import Player from "../model/Player";
-
-export enum CurrencyControllerResults{
-    success = 'Success',
-    insufficientFunds = 'Insufficient Funds'
-}
 
 export default class CurrencyController{
 

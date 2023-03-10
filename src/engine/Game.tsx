@@ -1,6 +1,7 @@
-import CurrencyController, { CurrencyControllerResults } from "../controller/CurrencyController";
-import { MakableItem, listOfMakableItems, listOfMakableItemsNames } from "../data/ListOfMakableItems";
+import CurrencyController from "../controller/CurrencyController";
+import { MakableItem, listOfMakableItems } from "../data/ListOfMakableItems";
 import Player, { InventoryControllerResults } from "../model/Player";
+import { GameEngineResultMessage, listOfMakableItemsNames, CurrencyControllerResults } from "../data/ListOfEnum"
 
 export default class Game{
     private _makableItemsArr = listOfMakableItems;
@@ -32,10 +33,12 @@ export default class Game{
                 } else {
                     console.log(CurrencyControllerResults.insufficientFunds);
                 }
-                
+                return GameEngineResultMessage.success;
             }, ( item !== undefined ? item.getTimeToMake * 1000 : 0));
+            return GameEngineResultMessage.success;
         } else {
             console.log('item not found');
+            return GameEngineResultMessage.error;
         }
     }
 
@@ -46,14 +49,14 @@ export default class Game{
             console.log('item exists in inventory');
             if ( player.removeItemFromInventory({item: item!, quantity: 1}) === InventoryControllerResults.success){
                 this.cc.addCurrency({player: player, currencyToAdd: item!.getAmountEarned});
+                return GameEngineResultMessage.success;
             } else {
                 console.log(InventoryControllerResults.insufficientItems);
+                return GameEngineResultMessage.insufficient;
             }
-            
-            console.log(player);
-            
         } else {
             console.log('item doesn\'t exist in inventory');
+            return GameEngineResultMessage.itemDoesNotExist;
         }
     }
 }

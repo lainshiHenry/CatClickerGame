@@ -1,16 +1,5 @@
-export enum listOfMakableItemsNames{
-    AppleSlices = 'Apple Slices',
-    BananaSlices = 'Banana Slices',
-    Cereal = 'Cereal',
-    na = 'NA'
-}
-
-export interface MakableItemProps{ 
-    nameOfItem: listOfMakableItemsNames,
-    timeToMake: number,
-    amountEarned: number,
-    costToMake: number,
-} 
+import { listOfMakableItemsNames } from "./ListOfEnum";
+import { MakableItemProps } from "./ListOfInterface";
 
 export class MakableItem{
     // private _nameOfItem: string = '';
