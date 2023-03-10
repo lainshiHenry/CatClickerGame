@@ -1,8 +1,5 @@
-export interface UpgradeItemProps {
-    nameOfUpgrade: string,
-    upgradeValue: number,
-    costToUpgrade: number,
-}
+import { UpgradeItemProps } from "./ListOfInterface";
+
 
 export const listOfUpgrades: UpgradeItemProps[] = [
     {

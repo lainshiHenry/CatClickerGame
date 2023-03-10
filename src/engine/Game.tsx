@@ -1,7 +1,8 @@
 import CurrencyController from "../controller/CurrencyController";
-import { MakableItem, listOfMakableItems } from "../data/ListOfMakableItems";
-import Player, { InventoryControllerResults } from "../model/Player";
-import { GameEngineResultMessage, listOfMakableItemsNames, CurrencyControllerResults } from "../data/ListOfEnum"
+import { listOfMakableItems } from "../data/ListOfMakableItems";
+import Player from "../model/Player";
+import { GameEngineResultMessage, listOfMakableItemsNames, CurrencyControllerResults, InventoryControllerResults } from "../data/ListOfEnum"
+import { MakableItem } from "../model/MakableItem";
 
 export default class Game{
     private _makableItemsArr = listOfMakableItems;

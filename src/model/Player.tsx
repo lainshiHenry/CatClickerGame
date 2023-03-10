@@ -1,38 +1,7 @@
-import { MakableItem } from "../data/ListOfMakableItems";
-
-export enum InventoryControllerResults{
-    success = 'Success',
-    insufficientItems = 'Insufficient Items',
-    cannotFindItem = 'Cannot Find Item(s)',
-}
-
-interface PlayerProps{
-    name: string,
-    currentScore: number,
-    currency: number,
-    specialCurrency: number,
-}
-
-interface PlayerInventoryProps{
-    item: MakableItem,
-    quantity: number,
-}
-
-export class PlayerInventory{
-    private _item: MakableItem;
-    private _quantity: number;
-
-    constructor({item, quantity}: PlayerInventoryProps){
-        this._item = item;
-        this._quantity = quantity;
-    }
-
-    get getItem(){ return this._item }
-    get getQuantity() { return this._quantity }
-    set setQuantity(newValue: number) { this._quantity = newValue }
-
-
-}
+import { InventoryControllerResults } from "../data/ListOfEnum";
+import { PlayerProps } from "../data/ListOfInterface";
+import { MakableItem } from "./MakableItem";
+import { PlayerInventory } from "./PlayerInventory";
 
 export default class Player{
     private _name: string = '';

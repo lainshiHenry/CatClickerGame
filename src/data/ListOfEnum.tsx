@@ -17,3 +17,9 @@ export enum CurrencyControllerResults{
     success = 'Success',
     insufficientFunds = 'Insufficient Funds'
 };
+
+export enum InventoryControllerResults{
+    success = 'Success',
+    insufficientItems = 'Insufficient Items',
+    cannotFindItem = 'Cannot Find Item(s)',
+};

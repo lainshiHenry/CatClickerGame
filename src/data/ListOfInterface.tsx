@@ -1,3 +1,4 @@
+import { MakableItem } from "../model/MakableItem";
 import { listOfMakableItemsNames } from "./ListOfEnum";
 
 export interface MakableItemProps{ 
@@ -6,3 +7,27 @@ export interface MakableItemProps{
     amountEarned: number,
     costToMake: number,
 };
+
+export interface PlayerProps{
+    name: string,
+    currentScore: number,
+    currency: number,
+    specialCurrency: number,
+};
+
+export interface PlayerInventoryProps{
+    item: MakableItem,
+    quantity: number,
+};
+
+export interface UpgradeItemProps {
+    nameOfUpgrade: string,
+    upgradeValue: number,
+    costToUpgrade: number,
+};
+
+export interface CustomerInfoProps {
+    customerName: string,
+    // customerImgPath: string,
+    itemToBuy: MakableItem,
+}
