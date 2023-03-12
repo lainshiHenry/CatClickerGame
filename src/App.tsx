@@ -8,6 +8,7 @@ import NotificationComponent from './component/NotificationComponent';
 import { blankCustomer } from './data/ListOfCustomerInfo';
 import CustomerComponent from './component/CustomerComponent';
 import CustomerController from './controller/CustomerController';
+import PlayerInventoryComponent from './component/PlayerInventoryComponent';
 
 function App() {
   const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 1, specialCurrency: 0}));
@@ -79,7 +80,8 @@ function App() {
         <button onClick={() => { handleCreateItem(listOfMakableItemsNames.AppleSlices) }}>Make Apple Slices</button>
         <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Bananas) }}>Make Banana Slices</button>
         <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Carrot) }}>Make Carrot</button>
-        <br />
+        {/* <br /> */}
+        <PlayerInventoryComponent player={playerA.current}/>
         {/* <button className='mainButton' onClick={() => {}}><img src={logo} className="App-logo" alt="logo" /></button>
         <button onClick={() => { handleSellItem(listOfMakableItemsNames.AppleSlices) }}>Sell Apple Slices</button>
         <button onClick={() => { handleSellItem(listOfMakableItemsNames.Bananas) }}>Sell Banana Slices</button> */}

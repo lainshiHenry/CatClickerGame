@@ -1,0 +1,24 @@
+h2 {
+    color: #000;
+}
+
+.InventoryList{
+    display: flex;
+    height: 39px;
+    border: 2px solid black;
+}
+
+.InventoryListItem{
+    border: 2px solid black;
+    position: relative;
+}
+
+.InventoryListItem > img {
+    width: 32px;
+    height: 32px;
+}
+
+.InventoryListItem > p {
+    position: absolute;
+    top: 0;
+}
