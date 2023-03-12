@@ -30,13 +30,10 @@ const blankMakableItem: MakableItem = new MakableItem({
 });
 
 export function findMakableItem(item: listOfMakableItemsNames) {
-    if( item ){
         return listOfMakableItems.find((element) => {
+            console.log(`elemenet: ${element.getNameOfItem} & item: ${item} = matches ${element.getNameOfItem === item}`);
             if( element.getNameOfItem === item){
                 return true;
-            }
-            return blankMakableItem;
+            } 
         });
-    }
-    return blankMakableItem;
 }

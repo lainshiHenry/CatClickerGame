@@ -10,9 +10,6 @@ const CurrencyComponent = ({player}: {player: Player}) => {
         <p>{`Currency: ${player.getCurrency}`}</p>
         <p>{`Special Currency: ${player.getSpecialCurrency}`}</p>
       </section>
-      <section className='secondSection'>
-        <p>{`Earning Rate: ${player.getEarningRatePerSecond}`}</p>
-      </section>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import './img/cats_clicker.gif'
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Player from './model/Player';
@@ -8,14 +7,16 @@ import { GameEngineResultMessage, listOfMakableItemsNames } from './data/ListOfE
 import NotificationComponent from './component/NotificationComponent';
 import { blankCustomer } from './data/ListOfCustomerInfo';
 import CustomerComponent from './component/CustomerComponent';
+import CustomerController from './controller/CustomerController';
 
 function App() {
   const playerA = useRef(new Player({name: 'player', currentScore: 0, currency: 1, specialCurrency: 0}));
+  const customer = useRef(blankCustomer);
   const gameEngine = new Game();
+  const cc = new CustomerController();
   const [openDialog, setOpenDialog] = useState(false);
   const [notificationText, setNotificationText] = useState(GameEngineResultMessage.empty);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
-  const [currentCustomer, setCurrentCustomer] = useState(blankCustomer);
 
   const handleCreateItem = (itemToCreate: listOfMakableItemsNames) => {
     setNotificationText(
@@ -29,16 +30,31 @@ function App() {
     setIsNotificationVisible(true);
   }
   
-  const handleSellItem = (itemToSell: listOfMakableItemsNames) => {
-    setNotificationText(
-      gameEngine.sellItem({
-        player: playerA.current, 
-        item: gameEngine.getItemDetails({
-          itemName: itemToSell
-        })
+  const handleSellItem = () => {
+    const itemToSell = customer.current.getItemToBuy?.getNameOfItem;
+    const response = gameEngine.sellItem({
+      player: playerA.current, 
+      item: gameEngine.getItemDetails({
+        itemName: itemToSell!
       })
-    );
-    setIsNotificationVisible(true);
+    });
+    if( response === GameEngineResultMessage.success ){
+      customer.current.setIsSatisfied = true;
+      // currentCustomer.setIsSatisfied = true;
+      setNotificationText(response);
+      setIsNotificationVisible(true);
+      handleCustomerChange();
+    } else if (response === GameEngineResultMessage.itemDoesNotExist ) {
+      setNotificationText(response);
+      setIsNotificationVisible(true);
+    }
+    
+  }
+
+  const handleCustomerChange = () => {
+    if( customer.current.getIsSatisfied ){
+      customer.current = cc.getNextCustomer();
+    }
   }
 
   useEffect(() => {
@@ -46,19 +62,23 @@ function App() {
       setTimeout(() => {
             setIsNotificationVisible(false);
             setNotificationText(GameEngineResultMessage.empty);
-        }, 3000)
+        }, 1000)
     }
   }, [isNotificationVisible]);
 
+  useEffect(() => {
+    handleCustomerChange();
+  }, []);
 
   return (
     <div className="App">
        <div className="App-header">
-        {/* <CurrencyComponent player={playerA.current} /> */}
-        <CustomerComponent customer={currentCustomer} handleCustomerPurchase={handleSellItem} />
+        <CurrencyComponent player={playerA.current} />
+        <CustomerComponent customer={customer.current} handleCustomerPurchase={handleSellItem} />
         {/* <button className='mainButton' onClick={() => {}}><img src={blankCustomer.getImgPath} className="App-logo" alt="logo" /></button> */}
         <button onClick={() => { handleCreateItem(listOfMakableItemsNames.AppleSlices) }}>Make Apple Slices</button>
         <button onClick={() => { handleCreateItem(listOfMakableItemsNames.BananaSlices) }}>Make Banana Slices</button>
+        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Cereal) }}>Make Cereal</button>
         <br />
         {/* <button className='mainButton' onClick={() => {}}><img src={logo} className="App-logo" alt="logo" /></button>
         <button onClick={() => { handleSellItem(listOfMakableItemsNames.AppleSlices) }}>Sell Apple Slices</button>

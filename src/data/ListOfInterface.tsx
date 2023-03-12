@@ -28,6 +28,7 @@ export interface UpgradeItemProps {
 
 export interface CustomerInfoProps {
     customerName: string,
-    // customerImgPath: string,
-    itemToBuy: MakableItem,
+    customerImgPath: string,
+    // itemToBuy: MakableItem,
+    itemToBuy: listOfMakableItemsNames,
 }

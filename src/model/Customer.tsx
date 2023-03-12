@@ -1,21 +1,30 @@
+import { listOfMakableItemsNames } from "../data/ListOfEnum";
 import { CustomerInfoProps } from "../data/ListOfInterface";
+import { findMakableItem } from "../data/ListOfMakableItems";
 import { MakableItem } from "./MakableItem";
 
 export class Customer{
     private _customerName: string = '';
     private _imgPath: string = '';
-    private _itemToBuy: MakableItem;
+    // private _itemToBuy: MakableItem;
+    private _itemToBuy: listOfMakableItemsNames;
+    private _isSatisfied: boolean = false;
 
-    constructor({customerName, itemToBuy}: CustomerInfoProps){
+    constructor({customerName, itemToBuy, customerImgPath}: CustomerInfoProps){
         this._customerName = customerName;
-        this._imgPath = '../img/cats_clicker.gif';
+        // this._imgPath = '../img/cats_clicker.gif';
         // this._imgPath = '../img/cat.png';
+        this._imgPath = customerImgPath;
         this._itemToBuy = itemToBuy;
+        this._isSatisfied = false;
     }
 
     get getImgPath(){ return this._imgPath }
     get getCustomerName(){ return this._customerName }
-    get getItemToBuy(){ return this._itemToBuy }
+    get getItemToBuy(){ return findMakableItem(this._itemToBuy) }
+    get getIsSatisfied() { return this._isSatisfied }
+
+    set setIsSatisfied(newValue:boolean) { this._isSatisfied = newValue }
 
     requestItemToBuy(){}
 }
