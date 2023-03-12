@@ -1,16 +1,28 @@
-h2 {
+.PlayerInventoryComponent{
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PlayerInventoryComponent > h2 {
     color: #000;
 }
 
 .InventoryList{
     display: flex;
-    height: 39px;
-    border: 2px solid black;
+    justify-content: center;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
 }
 
 .InventoryListItem{
     border: 2px solid black;
     position: relative;
+    padding: 2px;
+    width: 40px;
 }
 
 .InventoryListItem > img {
@@ -20,5 +32,17 @@ h2 {
 
 .InventoryListItem > p {
     position: absolute;
-    top: 0;
+    margin: 0;
+    bottom: 0;
+    font-size: 18px;
+    height: inherit;
+    color: #000;
+}
+
+.EmptyInventoryList {
+    height: 41px;
+    width: 44px;
+    border: 2px solid black;
+    margin: 0;
+    padding-left: 0;
 }

@@ -6,7 +6,7 @@ import { PlayerInventory } from '../model/PlayerInventory'
 const PlayerInventoryComponent = ({player}: {player: Player}) => {
 
     function generateInventoryListToDisplay(playerInventory: PlayerInventory[]){
-        return <ul className='InventoryList'>{playerInventory.map((value) => {
+        return <ul className={playerInventory.length > 0 ? 'InventoryList' : 'EmptyInventoryList'}>{playerInventory.map((value) => {
             return generateInventoryListItem(value);
         })}</ul>
     }
@@ -21,7 +21,7 @@ const PlayerInventoryComponent = ({player}: {player: Player}) => {
     }
 
   return (
-    <div>
+    <div className='PlayerInventoryComponent'>
         <h2>Inventory</h2>
         {generateInventoryListToDisplay(player.getInventory)}
     </div>

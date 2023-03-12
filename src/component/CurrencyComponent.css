@@ -1,13 +1,18 @@
 .currencyComponent{
     display: flex;
     flex-direction: column;
-}
-p{
-    color: #000;
+    width: inherit;
+    align-items: center;
+    position: absolute;
+    top: 0;
 }
 
 .firstSection{
     display: flex;
-    flex-direction: row;
+}
+
+.firstSection > p {
+    color: #000;
+    
 }
 .secondSection{}
