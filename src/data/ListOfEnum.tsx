@@ -8,8 +8,8 @@ export enum GameEngineResultMessage{
 
 export enum listOfMakableItemsNames{
     AppleSlices = 'Apple Slices',
-    BananaSlices = 'Banana Slices',
-    Cereal = 'Cereal',
+    Bananas = 'Banana',
+    Carrot = 'Carrot',
     na = 'NA'
 };
 

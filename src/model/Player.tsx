@@ -9,7 +9,6 @@ export default class Player{
     private _currency: number = 0;
     private _specialCurrency: number = 0;
     private _earningRatePerSecond: number = 1;
-    // private _inventory: MakableItem[] = [];
     private _inventory: PlayerInventory[] = [];
 
     constructor({name, currentScore, currency, specialCurrency}: PlayerProps){
@@ -32,6 +31,7 @@ export default class Player{
     get getSpecialCurrency(){ return this._specialCurrency }
     get getCurrentScore() {return this._currentScore }
     get getInventory() { return this._inventory }
+    get getPlayerName() { return this._name }
 
     findItemInInventory({item}: {item: MakableItem}){
         return this.getInventory.find((element) => {

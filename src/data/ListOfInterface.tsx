@@ -6,6 +6,7 @@ export interface MakableItemProps{
     timeToMake: number,
     amountEarned: number,
     costToMake: number,
+    imgPath: string,
 };
 
 export interface PlayerProps{

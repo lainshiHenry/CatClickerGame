@@ -14,7 +14,7 @@ function App() {
   const customer = useRef(blankCustomer);
   const gameEngine = new Game();
   const cc = new CustomerController();
-  const [openDialog, setOpenDialog] = useState(false);
+  // const [openDialog, setOpenDialog] = useState(false);
   const [notificationText, setNotificationText] = useState(GameEngineResultMessage.empty);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
@@ -66,9 +66,9 @@ function App() {
     }
   }, [isNotificationVisible]);
 
-  useEffect(() => {
-    handleCustomerChange();
-  }, []);
+  // useEffect(() => {
+  //   handleCustomerChange();
+  // });
 
   return (
     <div className="App">
@@ -77,12 +77,12 @@ function App() {
         <CustomerComponent customer={customer.current} handleCustomerPurchase={handleSellItem} />
         {/* <button className='mainButton' onClick={() => {}}><img src={blankCustomer.getImgPath} className="App-logo" alt="logo" /></button> */}
         <button onClick={() => { handleCreateItem(listOfMakableItemsNames.AppleSlices) }}>Make Apple Slices</button>
-        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.BananaSlices) }}>Make Banana Slices</button>
-        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Cereal) }}>Make Cereal</button>
+        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Bananas) }}>Make Banana Slices</button>
+        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Carrot) }}>Make Carrot</button>
         <br />
         {/* <button className='mainButton' onClick={() => {}}><img src={logo} className="App-logo" alt="logo" /></button>
         <button onClick={() => { handleSellItem(listOfMakableItemsNames.AppleSlices) }}>Sell Apple Slices</button>
-        <button onClick={() => { handleSellItem(listOfMakableItemsNames.BananaSlices) }}>Sell Banana Slices</button> */}
+        <button onClick={() => { handleSellItem(listOfMakableItemsNames.Bananas) }}>Sell Banana Slices</button> */}
         <NotificationComponent notificationText={notificationText} isNotificationVisible={isNotificationVisible}/>
       </div>
     </div>

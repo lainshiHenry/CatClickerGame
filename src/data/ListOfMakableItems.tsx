@@ -7,26 +7,30 @@ export const listOfMakableItems: MakableItem[] = [
         timeToMake: 3,
         amountEarned: 10,
         costToMake: 1,
+        imgPath: '../img/food_item/fruit/apple.svg'
     }),
     new MakableItem({
-        nameOfItem: listOfMakableItemsNames.BananaSlices,
+        nameOfItem: listOfMakableItemsNames.Bananas,
         timeToMake: 2,
         amountEarned: 11,
         costToMake: 1,
+        imgPath: '../img/food_item/fruit/banana.svg'
     }),
     new MakableItem({
-        nameOfItem: listOfMakableItemsNames.Cereal,
+        nameOfItem: listOfMakableItemsNames.Carrot,
         timeToMake: 5,
         amountEarned: 13,
         costToMake: 1,
+        imgPath: '../img/food_item/vegetable/carrot.svg'
     })
 ];
 
-const blankMakableItem: MakableItem = new MakableItem({
+export const blankMakableItem: MakableItem = new MakableItem({
     nameOfItem: listOfMakableItemsNames.na,
     timeToMake: 0,
     amountEarned: 0,
     costToMake: 0,
+    imgPath: '../food_item/fruit/olive.svg'
 });
 
 export function findMakableItem(item: listOfMakableItemsNames) {
@@ -35,5 +39,6 @@ export function findMakableItem(item: listOfMakableItemsNames) {
             if( element.getNameOfItem === item){
                 return true;
             } 
+            return false;
         });
 }
