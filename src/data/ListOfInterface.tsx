@@ -32,4 +32,5 @@ export interface CustomerInfoProps {
     customerImgPath: string,
     // itemToBuy: MakableItem,
     itemToBuy: listOfMakableItemsNames,
+    quantityToBuy: number,
 }

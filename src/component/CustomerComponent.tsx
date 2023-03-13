@@ -7,7 +7,7 @@ const CustomerComponent = ({customer, handleCustomerPurchase}: {customer: Custom
 
   return (
     <div className='customerComponent'>
-        <p>I want to buy {customer.getItemToBuy?.getNameOfItem}</p>
+        <p>I want to buy {customer.getQuantityToBuy} {customer.getItemToBuy?.getNameOfItem}</p>
         <button className='mainButton' onClick={() => {handleCustomerPurchase(customer.getItemToBuy!.getNameOfItem)}}>
             <img src={customer.getImgPath} className='App-logo' alt=''></img>
         </button>

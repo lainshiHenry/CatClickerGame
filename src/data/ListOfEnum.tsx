@@ -1,6 +1,6 @@
 export enum GameEngineResultMessage{
     success = 'Success',
-    insufficient = 'Insufficient',
+    insufficient = 'Insufficient Items',
     itemDoesNotExist = 'Item Does Not Exist',
     error = 'Error',
     empty = '',

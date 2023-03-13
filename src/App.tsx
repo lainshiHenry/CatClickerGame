@@ -33,11 +33,13 @@ function App() {
   
   const handleSellItem = () => {
     const itemToSell = customer.current.getItemToBuy?.getNameOfItem;
+    const quantityToSell = customer.current.getQuantityToBuy;
     const response = gameEngine.sellItem({
       player: playerA.current, 
       item: gameEngine.getItemDetails({
         itemName: itemToSell!
-      })
+      }),
+      quantityToSell: quantityToSell,
     });
     if( response === GameEngineResultMessage.success ){
       customer.current.setIsSatisfied = true;
@@ -45,11 +47,10 @@ function App() {
       setNotificationText(response);
       setIsNotificationVisible(true);
       handleCustomerChange();
-    } else if (response === GameEngineResultMessage.itemDoesNotExist ) {
+    } else {
       setNotificationText(response);
       setIsNotificationVisible(true);
-    }
-    
+    }  
   }
 
   const handleCustomerChange = () => {

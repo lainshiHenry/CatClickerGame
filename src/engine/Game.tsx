@@ -44,13 +44,13 @@ export default class Game{
         }
     }
 
-    sellItem({player, item}: {player: Player, item: MakableItem | undefined }){
+    sellItem({player, item, quantityToSell = 1}: {player: Player, item: MakableItem | undefined, quantityToSell: number }){
         const doesItemExist = player.findItemInInventory({item: item!});
 
         if( doesItemExist ){
             console.log('item exists in inventory');
-            if ( player.removeItemFromInventory({item: item!, quantity: 1}) === InventoryControllerResults.success){
-                this.cc.addCurrency({player: player, currencyToAdd: item!.getAmountEarned});
+            if ( player.removeItemFromInventory({item: item!, quantity: quantityToSell}) === InventoryControllerResults.success){
+                this.cc.addCurrency({player: player, currencyToAdd: (item!.getAmountEarned * quantityToSell)});
                 return GameEngineResultMessage.success;
             } else {
                 console.log(InventoryControllerResults.insufficientItems);
@@ -61,4 +61,5 @@ export default class Game{
             return GameEngineResultMessage.itemDoesNotExist;
         }
     }
+
 }
