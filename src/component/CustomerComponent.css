@@ -22,3 +22,8 @@
     color: #000;
     width: 100%;
   }
+
+  .infoText {
+    font-size: 10px;
+    font-style: italic;
+  }

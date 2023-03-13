@@ -19,6 +19,11 @@ function App() {
   const [notificationText, setNotificationText] = useState(GameEngineResultMessage.empty);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
+  function createCreateItemButton(itemToCreate: listOfMakableItemsNames){
+    const textToDisplay = `Make ${itemToCreate}`;
+    return <button onClick={() => { handleCreateItem(itemToCreate) }}>{textToDisplay}</button>
+  }
+
   const handleCreateItem = (itemToCreate: listOfMakableItemsNames) => {
     setNotificationText(
       gameEngine.makeItem({
@@ -77,11 +82,11 @@ function App() {
        <div className="App-header">
         <CurrencyComponent player={playerA.current} />
         <CustomerComponent customer={customer.current} handleCustomerPurchase={handleSellItem} />
-        {/* <button className='mainButton' onClick={() => {}}><img src={blankCustomer.getImgPath} className="App-logo" alt="logo" /></button> */}
-        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.AppleSlices) }}>Make Apple Slices</button>
-        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Bananas) }}>Make Banana Slices</button>
-        <button onClick={() => { handleCreateItem(listOfMakableItemsNames.Carrot) }}>Make Carrot</button>
-        {/* <br /> */}
+        
+        {createCreateItemButton(listOfMakableItemsNames.AppleSlices)}
+        {createCreateItemButton(listOfMakableItemsNames.Bananas)}
+        {createCreateItemButton(listOfMakableItemsNames.Carrot)}
+        
         <PlayerInventoryComponent player={playerA.current}/>
         {/* <button className='mainButton' onClick={() => {}}><img src={logo} className="App-logo" alt="logo" /></button>
         <button onClick={() => { handleSellItem(listOfMakableItemsNames.AppleSlices) }}>Sell Apple Slices</button>

@@ -11,7 +11,7 @@ const CustomerComponent = ({customer, handleCustomerPurchase}: {customer: Custom
         <button className='mainButton' onClick={() => {handleCustomerPurchase(customer.getItemToBuy!.getNameOfItem)}}>
             <img src={customer.getImgPath} className='App-logo' alt=''></img>
         </button>
-        
+        <p className='infoText'>Click on the picture to sell the items to me.</p>
     </div>
   )
 }
