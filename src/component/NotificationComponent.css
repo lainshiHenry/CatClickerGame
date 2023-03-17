@@ -3,7 +3,7 @@
     /* left: 0; */
     top: 80%;
     /* padding: 5px; */
-    background-color: rgba(32, 33, 33, 0.9);
+    background-color: rgba(32, 33, 33, 0.7);
     border-radius: 50%;
     width: 125px;
 }
@@ -20,6 +20,20 @@
 
 .notificationShown{
     display: block;
+}
+
+.notificationSuccess{
+    border: 3px solid green;
+}
+.notificationWarning{
+    border: 3px solid orange;
+}
+.notificationError{
+    border: 3px solid red;
+}
+
+.notificationNone{
+    border: 0px;
 }
 
 .fade{animation: fadeIn 3s;}

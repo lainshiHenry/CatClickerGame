@@ -1,7 +1,12 @@
+*{
+  background-color: #FAEEE5;
+  color: #000;
+}
+
 .App {
   text-align: center;
-  width: 100dvw;
-  height: 100dvh;
+  /* max-width: 100dvw;
+  height: 100dvh; */
 }
 
 /* .App-logo {
@@ -44,6 +49,10 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.buttonGroup > button {
+  margin: 5px 10px;
 }
 
 /* @keyframes App-logo-spin {

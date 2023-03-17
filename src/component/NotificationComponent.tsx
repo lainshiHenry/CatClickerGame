@@ -1,14 +1,23 @@
 import React from 'react'
 import './NotificationComponent.css'
 
-interface NotificationComponentProps{
-    notificationText: string,
-    isNotificationVisible: boolean
+export enum NotificationStatusType{
+  success = 'notificationSuccess',
+  warning = 'notificationWarning',
+  error = 'notificationError',
+  none = '',
 }
 
-const NotificationComponent = ({notificationText = '', isNotificationVisible = false}: NotificationComponentProps) => {
+interface NotificationComponentProps{
+    notificationText: string,
+    isNotificationVisible: boolean,
+    notificationStatusType: NotificationStatusType
+
+}
+
+const NotificationComponent = ({notificationText = '', isNotificationVisible = false, notificationStatusType = NotificationStatusType.none}: NotificationComponentProps) => {
   return (
-    <div className={isNotificationVisible ? 'notification notificationShown fade' : 'notification notificationHidden'}>
+    <div className={(isNotificationVisible ? `notification notificationShown fade ${notificationStatusType}` : `notification notificationHidden`)}>
         <p className='notificationText'>{notificationText}</p>
     </div>
   )

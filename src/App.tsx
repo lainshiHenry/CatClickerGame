@@ -4,7 +4,7 @@ import Player from './model/Player';
 import CurrencyComponent from './component/CurrencyComponent';
 import Game from './engine/Game';
 import { GameEngineResultMessage, listOfMakableItemsNames } from './data/ListOfEnum';
-import NotificationComponent from './component/NotificationComponent';
+import NotificationComponent, { NotificationStatusType } from './component/NotificationComponent';
 import { blankCustomer } from './data/ListOfCustomerInfo';
 import CustomerComponent from './component/CustomerComponent';
 import CustomerController from './controller/CustomerController';
@@ -18,6 +18,7 @@ function App() {
   // const [openDialog, setOpenDialog] = useState(false);
   const [notificationText, setNotificationText] = useState(GameEngineResultMessage.empty);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const notificationType = useRef(NotificationStatusType.none);
 
   function createCreateItemButton(itemToCreate: listOfMakableItemsNames){
     const textToDisplay = `Make ${itemToCreate}`;
@@ -25,14 +26,14 @@ function App() {
   }
 
   const handleCreateItem = (itemToCreate: listOfMakableItemsNames) => {
-    setNotificationText(
-      gameEngine.makeItem({
-        player: playerA.current, 
-        item: gameEngine.getItemDetails({
-          itemName: itemToCreate
-        })
+    let result = gameEngine.makeItem({
+      player: playerA.current, 
+      item: gameEngine.getItemDetails({
+        itemName: itemToCreate
       })
-    );
+    });
+    notificationType.current = (result === GameEngineResultMessage.success ? NotificationStatusType.success : NotificationStatusType.error);
+    setNotificationText(result);
     setIsNotificationVisible(true);
   }
   
@@ -48,12 +49,13 @@ function App() {
     });
     if( response === GameEngineResultMessage.success ){
       customer.current.setIsSatisfied = true;
-      // currentCustomer.setIsSatisfied = true;
       setNotificationText(response);
+      notificationType.current = NotificationStatusType.success;
       setIsNotificationVisible(true);
       handleCustomerChange();
     } else {
       setNotificationText(response);
+      notificationType.current = NotificationStatusType.warning;
       setIsNotificationVisible(true);
     }  
   }
@@ -66,10 +68,12 @@ function App() {
 
   useEffect(() => {
     if(isNotificationVisible) {
-      setTimeout(() => {
+      // setTimeout(() => {
             setIsNotificationVisible(false);
+            notificationType.current = NotificationStatusType.none;
             setNotificationText(GameEngineResultMessage.empty);
-        }, 1000)
+
+        // }, 1000)
     }
   }, [isNotificationVisible]);
 
@@ -83,15 +87,14 @@ function App() {
         <CurrencyComponent player={playerA.current} />
         <CustomerComponent customer={customer.current} handleCustomerPurchase={handleSellItem} />
         
-        {createCreateItemButton(listOfMakableItemsNames.AppleSlices)}
-        {createCreateItemButton(listOfMakableItemsNames.Bananas)}
-        {createCreateItemButton(listOfMakableItemsNames.Carrot)}
-        
+        <div className='buttonGroup'>
+          {createCreateItemButton(listOfMakableItemsNames.AppleSlices)}
+          {createCreateItemButton(listOfMakableItemsNames.Bananas)}
+          {createCreateItemButton(listOfMakableItemsNames.Carrot)}
+        </div>
+      
         <PlayerInventoryComponent player={playerA.current}/>
-        {/* <button className='mainButton' onClick={() => {}}><img src={logo} className="App-logo" alt="logo" /></button>
-        <button onClick={() => { handleSellItem(listOfMakableItemsNames.AppleSlices) }}>Sell Apple Slices</button>
-        <button onClick={() => { handleSellItem(listOfMakableItemsNames.Bananas) }}>Sell Banana Slices</button> */}
-        <NotificationComponent notificationText={notificationText} isNotificationVisible={isNotificationVisible}/>
+        <NotificationComponent notificationText={notificationText} isNotificationVisible={isNotificationVisible} notificationStatusType={notificationType.current}/>
       </div>
     </div>
   );

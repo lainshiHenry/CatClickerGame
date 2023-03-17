@@ -4,7 +4,7 @@ import { listOfMakableItemsNames } from "./ListOfEnum";
 const currentHighestQuantityToBuy = 10;
 
 function _getRandomNumber(highestNum: number){
-    return Math.floor(Math.random() * highestNum);
+    return Math.floor(Math.random() * highestNum) + 1;
 }
 
 export const listOfCustomerIinfo: Customer[] = [

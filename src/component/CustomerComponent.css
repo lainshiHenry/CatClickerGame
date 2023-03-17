@@ -11,6 +11,7 @@
     border-style: none;
     border: 0px transparent solid;
     padding: 0;
+    position: relative;
   }
   
   .mainButton:active{
@@ -19,11 +20,27 @@
   }
 
   .customerComponent{
-    color: #000;
     width: 100%;
   }
 
   .infoText {
     font-size: 10px;
     font-style: italic;
+  }
+
+  .customerImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .iconBubble{
+    position: absolute;
+    top: 0;
+    right: 0;
+    translate: 50px;
+  }
+
+  .iconBubble > img {
+    width: 50px;
   }

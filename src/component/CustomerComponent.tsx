@@ -8,9 +8,13 @@ const CustomerComponent = ({customer, handleCustomerPurchase}: {customer: Custom
   return (
     <div className='customerComponent'>
         <p>I want to buy {customer.getQuantityToBuy} {customer.getItemToBuy?.getNameOfItem}</p>
-        <button className='mainButton' onClick={() => {handleCustomerPurchase(customer.getItemToBuy!.getNameOfItem)}}>
+        <div className='customerImage'>
+          <button className='mainButton' onClick={() => {handleCustomerPurchase(customer.getItemToBuy!.getNameOfItem)}}>
             <img src={customer.getImgPath} className='App-logo' alt=''></img>
-        </button>
+            <div className='iconBubble'><img src={customer.getItemToBuy?.getItemImgPath}></img></div>
+          </button>
+          
+        </div>
         <p className='infoText'>Click on the picture to sell the items to me.</p>
     </div>
   )

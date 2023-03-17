@@ -8,7 +8,7 @@ const CurrencyComponent = ({player}: {player: Player}) => {
     <div className='currencyComponent'>
       <section className='firstSection'>
         <p>{`Currency: ${player.getCurrency}`}</p>
-        <p>{`Special Currency: ${player.getSpecialCurrency}`}</p>
+        {/* <p>{`Special Currency: ${player.getSpecialCurrency}`}</p> */}
       </section>
     </div>
   )
